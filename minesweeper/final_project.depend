@@ -1,0 +1,53 @@
+# depslib dependency file v1.0
+1638721339 source:c:\users\admin\documents\c++\final_project\main.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	"function.h"
+	"Graphic.h"
+	"playsave.h"
+
+1638728304 source:c:\users\admin\documents\c++\final_project\function.cpp
+	<bits/stdc++.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"function.h"
+	"struct.h"
+	"Graphic.h"
+
+1638728102 c:\users\admin\documents\c++\final_project\function.h
+	"struct.h"
+	<stdlib.h>
+
+1637376598 c:\users\admin\documents\c++\final_project\struct.h
+	<iostream>
+
+1637328828 source:c:\users\admin\documents\c++\final_project\graphic.cpp
+	"Graphic.h"
+
+1637328805 c:\users\admin\documents\c++\final_project\graphic.h
+	<iostream>
+	<Windows.h>
+	<Shlwapi.h>
+	<conio.h>
+
+1638720670 c:\users\admin\documents\c++\final_project\playsave.h
+	"struct.h"
+	"function.h"
+
+1638728183 source:c:\users\admin\documents\c++\final_project\playsave.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	"playsave.h"
+	"struct.h"
+	"Graphic.h"
+	"function.h"
+
+1638728443 source:c:\users\admin\documents\c++\final_project\score.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	"playsave.h"
+	"struct.h"
+	"Graphic.h"
+	"function.h"
+
