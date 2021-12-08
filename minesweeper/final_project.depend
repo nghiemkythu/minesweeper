@@ -51,3 +51,64 @@
 	"Graphic.h"
 	"function.h"
 
+1638941638 source:c:\users\admin\documents\c++\minesweeper\function.cpp
+	<bits/stdc++.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"function.h"
+	"struct.h"
+	"Graphic.h"
+	"score.h"
+
+1638892744 c:\users\admin\documents\c++\minesweeper\function.h
+	"struct.h"
+	<stdlib.h>
+
+1637376598 c:\users\admin\documents\c++\minesweeper\struct.h
+	<iostream>
+
+1637328805 c:\users\admin\documents\c++\minesweeper\graphic.h
+	<iostream>
+	<Windows.h>
+	<Shlwapi.h>
+	<conio.h>
+
+1637328828 source:c:\users\admin\documents\c++\minesweeper\graphic.cpp
+	"Graphic.h"
+
+1638940843 source:c:\users\admin\documents\c++\minesweeper\main.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	"function.h"
+	"Graphic.h"
+	"playsave.h"
+	"score.h"
+
+1638811053 c:\users\admin\documents\c++\minesweeper\playsave.h
+	"struct.h"
+	"function.h"
+
+1638892744 source:c:\users\admin\documents\c++\minesweeper\playsave.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	"playsave.h"
+	"struct.h"
+	"Graphic.h"
+	"function.h"
+	"score.h"
+
+1638941347 source:c:\users\admin\documents\c++\minesweeper\score.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	"playsave.h"
+	"struct.h"
+	"Graphic.h"
+	"function.h"
+	"score.h"
+
+1638895087 c:\users\admin\documents\c++\minesweeper\score.h
+	"struct.h"
+	"function.h"
+	"playsave.h"
+

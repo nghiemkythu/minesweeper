@@ -6,7 +6,7 @@ using namespace std;
 #include "function.h"
 #include "struct.h"
 #include "Graphic.h"
-
+#include "score.h"
 
 void xoabang(Thongtino table[100][100], Thongtinbang &TTB){
     for (int i = 0; i < TTB.sohang; i++){
@@ -18,17 +18,16 @@ void xoabang(Thongtino table[100][100], Thongtinbang &TTB){
         }
     }
 }
-void chonchedo(Thongtino table[100][100], int &row, int &col, int &sobom){
+void chonchedo(Thongtino table[100][100], int &row, int &col, int &sobom, int& modeplay){
     cout << "Choose game mode." << endl;
     cout << endl;
     cout << "1. easy" << endl;
     cout << "2. medium" << endl;
     cout << "3. hard"<< endl;
     cout << "4. custom" << endl;
-    int Case;
     cout << "Select: ";
-    cin >> Case;
-    switch(Case)
+    cin >> modeplay;
+    switch(modeplay)
     {
     case 1:
         row = 8;
@@ -206,7 +205,8 @@ int demco(Thongtino table[100][100], int row,int colum, Thongtinbang &TTB){
     }
     return soco;
 }
-void xulyphim(Thongtino table[100][100], Thongtinbang &TTB, vitriphim &VTP, bool &dabamphim, bool &trangthaichoi, clock_t &start, clock_t &ending){
+void xulyphim(Thongtino table[100][100], Thongtinbang &TTB, vitriphim &VTP, bool &dabamphim, bool &trangthaichoi, clock_t &start, clock_t &ending, int time0, int& modeplay){
+    bool result;
     while(true){
         char c = getch();
         if(c == -32){
@@ -254,7 +254,7 @@ void xulyphim(Thongtino table[100][100], Thongtinbang &TTB, vitriphim &VTP, bool
                 //cout << "ban nhan z -> mo o" << endl;
                 if(trangthaichoi){
                     dabamphim = true;
-                    clickZ(table, VTP.y, VTP.x, TTB, VTP, dabamphim, trangthaichoi, start, ending);
+                    clickZ(table, VTP.y, VTP.x, TTB, VTP, dabamphim, trangthaichoi, result);
                 }
             }
             if(a == 120){
@@ -262,6 +262,7 @@ void xulyphim(Thongtino table[100][100], Thongtinbang &TTB, vitriphim &VTP, bool
                 if(trangthaichoi){
                     dabamphim = true;
                     clickX(table, VTP.y, VTP.x, TTB, VTP, dabamphim);
+
                 }
             }
             if(a == 101){
@@ -271,20 +272,62 @@ void xulyphim(Thongtino table[100][100], Thongtinbang &TTB, vitriphim &VTP, bool
             if(a == 99){
                 if(trangthaichoi){
                     dabamphim = true;
-                    clickC(table, VTP.y, VTP.x, TTB, VTP, dabamphim, trangthaichoi, start, ending);
+                    clickC(table, VTP.y, VTP.x, TTB, VTP, dabamphim, trangthaichoi, result);
                 }
             }
-            if(a == 13){
-                savegame(table, TTB, VTP, trangthaichoi);
+            if(a == 13){ //save game
+                if(trangthaichoi){
+                    ending = clock();
+                    int time_save = ((double) (ending - start))/CLOCKS_PER_SEC;
+                    time_save += time0;
+                    savegame(table, TTB, VTP, trangthaichoi, time_save, modeplay);
+                }
+            }
+        }
+        if(!trangthaichoi){
+            if(result){
+                ending = clock();
+                int time = ((double) (ending - start))/CLOCKS_PER_SEC;
+                time += time0;
+                setColorBGTextXY(toadoX(TTB.socot+4), 4, 15, 0, "Total time: %d s", time);
+                ranksave(modeplay, time);
+                xoabang(table, TTB);
+                setColorBGTextXY(toadoX(TTB.socot+4), 6, 15, 0, "new game (y/n)? ");
+                char n;
+                cin >> n;
+                if(n == 'y'){
+                    system("cls");
+                    newgame();
+                    break;
+                }
+                else{
+                    system("cls");
+                    return;
+                }
+            }
+            else{
+                xoabang(table, TTB);
+                setColorBGTextXY(toadoX(TTB.socot+4), 6, 15, 0, "new game (y/n)? ");
+                char n;
+                cin >> n;
+                if(n == 'y'){
+                    system("cls");
+                    newgame();
+                    break;
+                }
+                else{
+                    system("cls");
+                    return;
+                }
             }
         }
     }
 }
-void moo(Thongtino table[100][100], int Sx, int Sy, Thongtinbang &TTB, bool &trangthaichoi){
+void moo(Thongtino table[100][100], int Sx, int Sy, Thongtinbang &TTB, bool &trangthaichoi, bool& result){
     if(!table[Sx][Sy].damo && !table[Sx][Sy].camco){
         table[Sx][Sy].damo = true;
         if(table[Sx][Sy].cobom){
-            thua(table, TTB, trangthaichoi);
+            thua(table, TTB, trangthaichoi, result);
         }
         else{
             //table[Sx][Sy].damo = true;
@@ -297,7 +340,7 @@ void moo(Thongtino table[100][100], int Sx, int Sy, Thongtinbang &TTB, bool &tra
                 for ( int i = Sx-1; i <= Sx+1; i++){
                     for(int j = Sy-1; j <= Sy+1; j++){
                         if(i>= 0 && i <= TTB.sohang-1 && j>=0 && j <= TTB.socot-1){
-                            moo(table, i, j, TTB, trangthaichoi);
+                            moo(table, i, j, TTB, trangthaichoi, result);
                         }
                     }
                 }
@@ -305,34 +348,22 @@ void moo(Thongtino table[100][100], int Sx, int Sy, Thongtinbang &TTB, bool &tra
         }
     }
 }
-void clickZ(Thongtino table[100][100], int Sx, int Sy, Thongtinbang &TTB, vitriphim &VTP, bool &dabamphim, bool &trangthaichoi, clock_t &start, clock_t &ending){
+void clickZ(Thongtino table[100][100], int Sx, int Sy, Thongtinbang &TTB, vitriphim &VTP, bool &dabamphim, bool &trangthaichoi, bool& result){
     if(!table[Sx][Sy].damo && !table[Sx][Sy].camco){
-        moo(table, Sx, Sy, TTB, trangthaichoi);
+        moo(table, Sx, Sy, TTB, trangthaichoi, result);
         if(trangthaichoi){
             vebang(table, TTB, VTP, dabamphim);
             if((TTB.sobom + TTB.soodamo) == (TTB.socot*TTB.sohang)){
-                thang(table, TTB, trangthaichoi, start, ending);
+                thang(table, TTB, trangthaichoi, result);
             }
         }
     }
 }
-void thang(Thongtino table[100][100], Thongtinbang &TTB, bool &trangthaichoi, clock_t &start, clock_t &ending){
-    ending = clock();
-    int time = ((double) (ending - start))/CLOCKS_PER_SEC;
-    setColorBGTextXY(toadoX(TTB.socot+4), 4, 15, 0, "Total time: %d s", time);
-    //cout << endl << duration << endl;
+void thang(Thongtino table[100][100], Thongtinbang &TTB, bool &trangthaichoi, bool& result){
+    result = true;
     trangthaichoi = false;
-    xoabang(table, TTB);
-    setColorBGTextXY(toadoX(TTB.socot+4), 6, 15, 0, "new game (y/n)? ");
-    char n;
-    cin >> n;
-    if(n == 'y'){
-        system("cls");
-        newgame();
-    }
-    else return;
 }
-void thua(Thongtino table[100][100], Thongtinbang &TTB, bool &trangthaichoi){
+void thua(Thongtino table[100][100], Thongtinbang &TTB, bool &trangthaichoi, bool& result){
     for(int i = 0; i < TTB.sohang; i++){
         for(int j = 0; j < TTB.socot; j++){
             if(table[i][j].camco){
@@ -348,16 +379,8 @@ void thua(Thongtino table[100][100], Thongtinbang &TTB, bool &trangthaichoi){
             }
         }
     }
+    result = false;
     trangthaichoi = false;
-    xoabang(table, TTB);
-    setColorBGTextXY(toadoX(TTB.socot+4), 6, 15, 0, "new game (y/n)? ");
-    char n;
-    cin >> n;
-    if(n == 'y'){
-        system("cls");
-        newgame();
-    }
-    else return;
 }
 void clickX(Thongtino table[100][100], int Sx, int Sy, Thongtinbang &TTB, vitriphim &VTP, bool &dabamphim){
     if(!table[Sx][Sy].damo){
@@ -372,20 +395,20 @@ void clickX(Thongtino table[100][100], int Sx, int Sy, Thongtinbang &TTB, vitrip
     }
     vebang(table, TTB, VTP, dabamphim);
 }
-void clickC(Thongtino table[100][100], int Sx, int Sy, Thongtinbang &TTB, vitriphim &VTP, bool &dabamphim, bool &trangthaichoi, clock_t &start, clock_t &ending){
+void clickC(Thongtino table[100][100], int Sx, int Sy, Thongtinbang &TTB, vitriphim &VTP, bool &dabamphim, bool &trangthaichoi, bool& result){
     if(table[Sx][Sy].damo && table[Sx][Sy].sobomlancan){
         int socoxungquanh = demco(table, Sx, Sy, TTB);
         if(table[Sx][Sy].sobomlancan <= socoxungquanh){
             for ( int i = Sx-1; i <= Sx+1; i++){
                 for(int j = Sy-1; j <= Sy+1; j++){
                     if(i>= 0 && i <= TTB.sohang-1 && j>=0 && j <= TTB.socot-1){
-                        moo(table, i, j, TTB, trangthaichoi);
+                        moo(table, i, j, TTB, trangthaichoi, result);
                     }
                 }
             }
             if(trangthaichoi) vebang(table, TTB, VTP, dabamphim);
             if((TTB.sobom + TTB.soodamo) == (TTB.socot*TTB.sohang)){
-                thang(table, TTB, trangthaichoi, start, ending);
+                thang(table, TTB, trangthaichoi, result);
             }
         }
     }
@@ -394,17 +417,19 @@ void newgame(){
     Thongtinbang TTB;
     vitriphim VTP;
     Thongtino table[100][100];
+    int time0 = 0;
     bool dabamphim = false;
     bool trangthaichoi = false;
     int a, b, sobom;
-    chonchedo(table, a, b, sobom);
+    int modeplay;
+    chonchedo(table, a, b, sobom, modeplay);
     clock_t start, ending;
 
     khoitao(table, a, b, sobom, TTB, VTP, dabamphim, trangthaichoi, start);
-    xulyphim(table, TTB, VTP, dabamphim, trangthaichoi, start, ending);
+    xulyphim(table, TTB, VTP, dabamphim, trangthaichoi, start, ending, time0, modeplay);
     //xoabang(TTB);
 }
-void savegame(Thongtino table[100][100], Thongtinbang &TTB, vitriphim &VTP, bool &trangthaichoi){
+void savegame(Thongtino table[100][100], Thongtinbang &TTB, vitriphim &VTP, bool &trangthaichoi, int& time_save, int& modeplay){
     ofstream file ("gamestate.txt");
     file << TTB.sohang <<endl;
     file << TTB.socot <<endl;
@@ -416,6 +441,8 @@ void savegame(Thongtino table[100][100], Thongtinbang &TTB, vitriphim &VTP, bool
             file << table[i][j].cobom << " " << table[i][j].damo << " " << table[i][j].camco << " " << table[i][j].sobomlancan << endl;
         }
     }
-    file << trangthaichoi;
+    file << trangthaichoi << endl;
+    file << time_save << endl;
+    file << modeplay;
     file.close();
 }

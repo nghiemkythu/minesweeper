@@ -5,8 +5,8 @@ using namespace std;
 #include "struct.h"
 #include "Graphic.h"
 #include "function.h"
-
-void playsavedgame(Thongtino tablesave[100][100], Thongtinbang& TTB, bool& trangthaichoi){
+#include "score.h"
+void playsavedgame(Thongtino tablesave[100][100], Thongtinbang& TTB, bool& trangthaichoi, int& time0, int& modeplay){
     ifstream file;
     file.open("gamestate.txt");
     file >> TTB.sohang >> TTB.socot >> TTB.sobom >> TTB.soco >> TTB.soodamo;
@@ -16,6 +16,8 @@ void playsavedgame(Thongtino tablesave[100][100], Thongtinbang& TTB, bool& trang
         }
     }
     file >> trangthaichoi;
+    file >> time0;
+    file >> modeplay;
     file.close();
 }
 void play(){
@@ -23,8 +25,10 @@ void play(){
     bool trangthaichoi;
     Thongtino tablesave[100][100];
     vitriphim VTP;
+    int time0;
     bool dabamphim = false;
-    playsavedgame(tablesave, TTB, trangthaichoi);
+    int modeplay;
+    playsavedgame(tablesave, TTB, trangthaichoi, time0, modeplay);
     vebang(tablesave, TTB, VTP, dabamphim);
     setColorBGTextXY(1, TTB.sohang+2, 15, 0, "Press Z to choose open a square.");
     setColorBGTextXY(1, TTB.sohang+4, 15, 0, "Press X to flag or mark.");
@@ -34,6 +38,6 @@ void play(){
     clock_t start, ending;
     start = clock();
 
-    xulyphim(tablesave, TTB, VTP, dabamphim, trangthaichoi, start, ending);
+    xulyphim(tablesave, TTB, VTP, dabamphim, trangthaichoi, start, ending, time0, modeplay);
 
 }

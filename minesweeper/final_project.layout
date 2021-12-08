@@ -2,52 +2,69 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="struct.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="357" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="Graphic.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="571" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="function.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="score.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="136" topLine="0" />
+			<Cursor1 position="1748" topLine="60" />
+		</Cursor>
+	</File>
+	<File name="playsave.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="204" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="function.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3607" topLine="119" />
+			<Cursor1 position="10263" topLine="59" />
 		</Cursor>
 		<Folding>
-			<Collapse line="186" />
-			<Collapse line="197" />
+			<Collapse line="10" />
+			<Collapse line="60" />
+			<Collapse line="80" />
+			<Collapse line="83" />
+			<Collapse line="165" />
+			<Collapse line="185" />
+			<Collapse line="196" />
+			<Collapse line="365" />
+			<Collapse line="384" />
+			<Collapse line="397" />
 		</Folding>
-	</File>
-	<File name="playsave.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="60" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="playsave.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="45" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="658" topLine="0" />
-		</Cursor>
 	</File>
 	<File name="Graphic.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1824" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="playsave.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1683" topLine="6" />
+		</Cursor>
+	</File>
+	<File name="struct.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="357" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="score.h" open="1" top="1" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="156" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1405" topLine="31" />
+		</Cursor>
+	</File>
+	<File name="function.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1650" topLine="0" />
+		</Cursor>
+	</File>
 	<Target name="Debug" top="score.h">
-		<File name="score.h" />
 		<File name="Graphic.h" />
 		<File name="Graphic.cpp" />
 		<File name="main.cpp" />
@@ -55,6 +72,8 @@
 		<File name="function.cpp" />
 		<File name="function.h" />
 		<File name="playsave.cpp" />
+		<File name="score.cpp" />
+		<File name="score.h" />
 		<File name="playsave.h" />
 	</Target>
 </CodeBlocks_layout_file>

@@ -3,6 +3,6 @@
 
 #include "struct.h"
 #include "function.h"
-void playsavedgame(Thongtino tablesave[100][100], Thongtinbang& TTB, bool& trangthaichoi);
+void playsavedgame(Thongtino tablesave[100][100], Thongtinbang& TTB, bool& trangthaichoi, int& time0);
 void play();
 #endif // PLAYSAVE_H_INCLUDED
